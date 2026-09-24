@@ -6,6 +6,8 @@ Program **Sistem Manajemen Pertandingan dan Klasemen Liga Basket** merupakan pro
 
 Program menerapkan konsep **CRUD (Create, Read, Update, Delete)** serta menggunakan `ArrayList` untuk menyimpan data selama program berjalan. Program juga menggunakan beberapa class, yaitu `Tim`, `Pertandingan`, `HasilPertandingan`, dan `Klasemen`.
 
+Struktur Program
+
 ## Alur Program
 
 Saat program dijalankan, pengguna akan diberikan menu utama yang terdiri dari beberapa pilihan:
@@ -56,6 +58,11 @@ Pengguna memilih menu dengan memasukkan nomor pilihan melalui `Scanner`. Setiap 
 
 Data yang dimasukkan pengguna akan disimpan ke dalam `ArrayList` sesuai dengan jenis datanya. Data tim disimpan pada `ArrayList<Tim>`, data pertandingan pada `ArrayList<Pertandingan>`, data hasil pertandingan pada `ArrayList<HasilPertandingan>`, dan data klasemen pada `ArrayList<Klasemen>`.
 
+**Encapsulation**
 Encapsulation digunakan pada masing-masing class dengan menerapkan `Access Modifier` dan `Setter` `Getter`. Encapsulation `Setter` `Getter` dapat ditemukan pada class Tim, Pertandingan, Hasil Pertandingan, dan Klasemen. Hal tersebut digunakan penulis untuk digunakan sebagai pintu gerbang resmi dari atribut-atribut yang diterapkan `Access Modifier` yang dimana atribut ditetapkan sebagai `private`.
 
+**Inheritance**
+Inheritance diterapkan pada class `Pertandingan` sebagai Parent dengan `PertandinganLiga` dan `PertandingaFinal` sebagai subclassnya.
+
+**Overriding dan Overloading**
 Overriding dan Overloading diterapkan pada subclass PertandinganLiga dan PertandinganFinal tetapi belum sepenuhnya dimanfaatkan atau diterapkan.
