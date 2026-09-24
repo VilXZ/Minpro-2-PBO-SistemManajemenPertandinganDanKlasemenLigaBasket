@@ -11,12 +11,27 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import apakah.Tim;
-import apakah.Pertandingan;
-import apakah.HasilPertandingan;
-import apakah.Klasemen;
+import java.util.InputMismatchException;
+import model.Tim;
+import model.Pertandingan;
+import model.HasilPertandingan;
+import model.Klasemen;
+import model.PertandinganFinal;
+import model.PertandinganLiga;
 
 public class Main {
+    
+    public static int inputInt(Scanner input) {
+    while (true) {
+        try {
+            return input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Input harus berupa angka!");
+            input.nextLine();
+            System.out.print("Masukkan lagi : ");
+        }
+    }
+}
 
     public static void main(String[] args) {
 
@@ -26,6 +41,28 @@ public class Main {
         ArrayList<Pertandingan> listMatch = new ArrayList<>();
         ArrayList<HasilPertandingan> listHasil = new ArrayList<>();
         ArrayList<Klasemen> listKlasemen = new ArrayList<>();
+        
+        Tim tim1 = new Tim(1, "Boston Celtics", "Boston", "Joe Mazzulla");
+
+        Tim tim2 = new Tim(2, "Los Angeles Lakers", "Los Angeles", "JJ Redick");
+
+        listBasket.add(tim1);
+        listBasket.add(tim2);
+        
+        Pertandingan pertandingan1 = new PertandinganLiga(1, "23 Januari 2025", "Crypto.com Arena", "Boston Celtics", "Los Angeles Lakers", "Selesai", 14);
+
+        listMatch.add(pertandingan1);
+        
+        HasilPertandingan hasil1 = new HasilPertandingan(1, 1, 96, 117, "Los Angeles Lakers");
+
+        listHasil.add(hasil1);
+        
+        Klasemen klasemen1 = new Klasemen("Boston Celtics", 1, 0, 1, 1);
+
+        Klasemen klasemen2 = new Klasemen("Los Angeles Lakers", 1, 1, 0, 2);
+
+        listKlasemen.add(klasemen1);
+        listKlasemen.add(klasemen2);
 
         int pilihan;
 
@@ -38,7 +75,7 @@ public class Main {
             System.out.println("5. Keluar");
 
             System.out.print("\nPilih salah satu : ");
-            pilihan = input.nextInt();
+            pilihan = inputInt(input);
             input.nextLine();
 
             switch (pilihan) {
@@ -55,7 +92,7 @@ public class Main {
                         System.out.println("5. Kembali");
 
                         System.out.print("\nPilih : ");
-                        pilihanTim = input.nextInt();
+                        pilihanTim = inputInt(input);
                         input.nextLine();
 
                         switch (pilihanTim) {
@@ -64,7 +101,7 @@ public class Main {
                                 System.out.println("\n==== TAMBAH TIM ====");
 
                                 System.out.print("ID Tim   : ");
-                                int idTim = input.nextInt();
+                                int idTim = inputInt(input);
                                 input.nextLine();
 
                                 System.out.print("Nama Tim : ");
@@ -131,7 +168,7 @@ public class Main {
                                             "Pilih nomor tim yang mau diubah : "
                                     );
 
-                                    int noTim = input.nextInt();
+                                    int noTim = inputInt(input);
                                     input.nextLine();
 
                                     if (noTim >= 1 &&
@@ -191,7 +228,7 @@ public class Main {
                                             "Pilih nomor tim yang mau dihapus : "
                                     );
 
-                                    int noTim = input.nextInt();
+                                    int noTim = inputInt(input);
                                     input.nextLine();
 
                                     if (noTim >= 1 &&
@@ -241,7 +278,7 @@ public class Main {
                         System.out.println("5. Kembali");
 
                         System.out.print("\nPilih : ");
-                        pilihanMatch = input.nextInt();
+                        pilihanMatch = inputInt(input);
                         input.nextLine();
 
                         switch (pilihanMatch) {
@@ -265,7 +302,7 @@ public class Main {
                                             "ID Pertandingan : "
                                     );
                                     int idPertandingan =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     System.out.print("Tanggal : ");
@@ -295,14 +332,14 @@ public class Main {
                                             "Pilih tim kandang : "
                                     );
                                     int pilihKandang =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     System.out.print(
                                             "Pilih tim tandang : "
                                     );
                                     int pilihTandang =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     if (pilihKandang >= 1 &&
@@ -348,6 +385,55 @@ public class Main {
                                             listMatch.add(
                                                     pertandinganBaru
                                             );
+                                            
+                                            System.out.println("\nJenis Pertandingan:");
+                                            System.out.println("1. Pertandingan Liga");
+                                            System.out.println("2. Pertandingan Final");
+
+                                            System.out.print("Pilih jenis : ");
+                                            int jenisPertandingan = inputInt(input);
+                                            input.nextLine();
+
+                                            if (jenisPertandingan == 1) {
+
+                                                System.out.print("Pekan Liga : ");
+                                                int pekan = inputInt(input);
+                                                input.nextLine();
+
+                                                pertandinganBaru = new PertandinganLiga(
+                                                        idPertandingan,
+                                                        tanggal,
+                                                        lokasi,
+                                                        timKandang,
+                                                        timTandang,
+                                                        status,
+                                                        pekan
+                                                );
+
+                                            } else if (jenisPertandingan == 2) {
+
+                                                System.out.print("Babak Final : ");
+                                                String babak = input.nextLine();
+
+                                                pertandinganBaru = new PertandinganFinal(
+                                                        idPertandingan,
+                                                        tanggal,
+                                                        lokasi,
+                                                        timKandang,
+                                                        timTandang,
+                                                        status,
+                                                        babak
+                                                );
+
+                                            } else {
+
+                                                System.out.println("Jenis pertandingan tidak tersedia.");
+                                                break;
+                                            }
+
+                                            listMatch.add(pertandinganBaru);
+
+                                            System.out.println("Pertandingan berhasil ditambahkan.");
 
                                             System.out.println(
                                                     "Pertandingan berhasil "
@@ -423,6 +509,33 @@ public class Main {
                                                 "Status      : "
                                                 + pertandingan.getStatus()
                                         );
+                                        
+                                        if (pertandingan instanceof PertandinganLiga) {
+
+                                            PertandinganLiga liga =
+                                                    (PertandinganLiga) pertandingan;
+
+                                            System.out.println(
+                                                    "Jenis       : Pertandingan Liga"
+                                            );
+
+                                            System.out.println(
+                                                    "Pekan Liga   : " + liga.getPekan()
+                                            );
+
+                                        } else if (pertandingan instanceof PertandinganFinal) {
+
+                                            PertandinganFinal finalMatch =
+                                                    (PertandinganFinal) pertandingan;
+
+                                            System.out.println(
+                                                    "Jenis       : Pertandingan Final"
+                                            );
+
+                                            System.out.println(
+                                                    "Babak       : " + finalMatch.getBabak()
+                                            );
+                                        }
                                     }
                                 }
                                 break;
@@ -461,7 +574,7 @@ public class Main {
                                     );
 
                                     int noPertandingan =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     if (noPertandingan >= 1 &&
@@ -550,7 +663,7 @@ public class Main {
                                     );
 
                                     int noPertandingan =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     if (noPertandingan >= 1 &&
@@ -624,7 +737,7 @@ public class Main {
                         System.out.print("\nPilih : ");
 
                         pilihanHasil =
-                                input.nextInt();
+                                inputInt(input);
                         input.nextLine();
 
                         switch (pilihanHasil) {
@@ -662,7 +775,7 @@ public class Main {
                                     );
 
                                     int pilihMatch =
-                                            input.nextInt();
+                                            inputInt(input);
                                     input.nextLine();
 
                                     if (pilihMatch >= 1 &&
@@ -677,7 +790,7 @@ public class Main {
                                                 "ID Hasil : "
                                         );
                                         int idHasil =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Skor "
@@ -687,7 +800,7 @@ public class Main {
                                         );
 
                                         int skorKandang =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Skor "
@@ -697,7 +810,7 @@ public class Main {
                                         );
 
                                         int skorTandang =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         input.nextLine();
 
@@ -837,7 +950,7 @@ public class Main {
                                     );
 
                                     int noHasil =
-                                            input.nextInt();
+                                            inputInt(input);
 
                                     input.nextLine();
 
@@ -854,14 +967,14 @@ public class Main {
                                         );
 
                                         int skorKandang =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Skor tandang baru : "
                                         );
 
                                         int skorTandang =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         input.nextLine();
 
@@ -937,7 +1050,7 @@ public class Main {
                                     );
 
                                     int noHasil =
-                                            input.nextInt();
+                                            inputInt(input);
 
                                     input.nextLine();
 
@@ -999,7 +1112,7 @@ public class Main {
                         System.out.print("\nPilih : ");
 
                         pilihanKlasemen =
-                                input.nextInt();
+                                inputInt(input);
 
                         input.nextLine();
 
@@ -1035,7 +1148,7 @@ public class Main {
                                     );
 
                                     int pilihTim =
-                                            input.nextInt();
+                                            inputInt(input);
 
                                     input.nextLine();
 
@@ -1052,28 +1165,28 @@ public class Main {
                                         );
 
                                         int jumlahPertandingan =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Jumlah menang : "
                                         );
 
                                         int jumlahMenang =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Jumlah kalah : "
                                         );
 
                                         int jumlahKalah =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Poin : "
                                         );
 
                                         int poin =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         input.nextLine();
 
@@ -1183,7 +1296,7 @@ public class Main {
                                     );
 
                                     int noKlasemen =
-                                            input.nextInt();
+                                            inputInt(input);
 
                                     input.nextLine();
 
@@ -1200,28 +1313,28 @@ public class Main {
                                         );
 
                                         int pertandinganBaru =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Jumlah menang baru : "
                                         );
 
                                         int menangBaru =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Jumlah kalah baru : "
                                         );
 
                                         int kalahBaru =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         System.out.print(
                                                 "Poin baru : "
                                         );
 
                                         int poinBaru =
-                                                input.nextInt();
+                                                inputInt(input);
 
                                         input.nextLine();
 
@@ -1282,7 +1395,7 @@ public class Main {
                                     );
 
                                     int noKlasemen =
-                                            input.nextInt();
+                                            inputInt(input);
 
                                     input.nextLine();
 

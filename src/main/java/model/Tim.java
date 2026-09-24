@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package apakah;
+package model;
 
 import java.util.ArrayList;
 
@@ -52,4 +52,12 @@ public class Tim {
     public void setPelatih(String pelatih) {
         this.pelatih = pelatih;
     }
+    
+    static void tampilkanDaftarTim(ArrayList<Tim> listBasket) {
+    for (int i = 0; i < listBasket.size(); i++) {
+        System.out.println(
+            (i + 1) + ". " + listBasket.get(i).getNamaTim()
+        );
+    }
+}
 }

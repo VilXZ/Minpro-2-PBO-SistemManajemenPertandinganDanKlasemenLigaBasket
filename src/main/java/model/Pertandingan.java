@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package apakah;
+package model;
 
 /**
  *
@@ -71,5 +71,20 @@ public class Pertandingan {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public String getInfoPertandingan() {
+    return "Pertandingan: " + timKandang + " vs " + timTandang
+            + " | Lokasi: " + lokasi
+            + " | Status: " + status;
+    }
+    
+    public String getInfoPertandingan(boolean tampilStatus) {
+    if (tampilStatus) {
+        return "Pertandingan: " + timKandang + " vs " + timTandang
+                + " | Status: " + status;
+    } else {
+        return "Pertandingan: " + timKandang + " vs " + timTandang;
+        }
     }
 }
